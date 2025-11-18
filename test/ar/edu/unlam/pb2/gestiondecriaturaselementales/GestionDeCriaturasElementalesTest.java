@@ -27,8 +27,9 @@ public class GestionDeCriaturasElementalesTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void seCreaUnaCriatura() {
+		
+		
 	}
 
 }
