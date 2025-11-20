@@ -1,5 +1,5 @@
 package ar.edu.unlam.pb2.gestiondecriaturaselementales;
 
-public class GestionDeCriaturas {
-
+public enum EstadoEmocional {
+	 TRANQUILA, INESTABLE
 }
