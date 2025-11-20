@@ -1,17 +1,41 @@
 package ar.edu.unlam.pb2.gestiondecriaturaselementales;
 
-public class CriaturaSalvaje extends Criatura {
+public class CriaturaSalvaje extends CriaturaElemental {
+	private final Integer AUMENTO_ALEATORIO_MAXIMO = 51;
+	
+	
+	public CriaturaSalvaje(String nombre) {
+		super(nombre);
+		this.nivelEnergia = generador.nextInt(151);
+	}
+	
+	public CriaturaSalvaje(String nombre, Elementos elemento, Integer nivelEnergia, EstadoEmocional estado) {
+		super(nombre, elemento, nivelEnergia, estado);
+		// TODO Auto-generated constructor stub
+	}
 
-    public CriaturaSalvaje(String nombre, Integer energia, Elemento afinidad) {
-        super(nombre, energia, afinidad);
-    }
+	@Override
+	public void entrenar() throws LimiteEnergiaSuperadoException {
+		Integer valorAAumentar = generador.nextInt(AUMENTO_ALEATORIO_MAXIMO);
+		Integer auxiliar = nivelEnergia;
+		if (this.nivelEnergia == this.MAXIMO_ENERGIA)
+			throw new LimiteEnergiaSuperadoException("La energia esta en su nivel maximo. No se puede seguir entrenando");
+		if ((auxiliar+valorAAumentar)> this.MAXIMO_ENERGIA) {
+			throw new LimiteEnergiaSuperadoException("No se puede superar los 200 puntos de energia.");
+		}
+		this.nivelEnergia += valorAAumentar;
+		
+	}
 
-    @Override
-    public void entrenar(Integer puntos) {
-    	  this.energia += puntos;
+	@Override
+	public void entrenar(Integer energia) {
+		Integer auxiliar = nivelEnergia;
+		if (this.nivelEnergia == this.MAXIMO_ENERGIA)
+			throw new LimiteEnergiaSuperadoException("La energia esta en su nivel maximo. No se puede seguir entrenando");
+		if ((auxiliar+energia)> this.MAXIMO_ENERGIA) {
+			throw new LimiteEnergiaSuperadoException("No se puede superar los 200 puntos de energia.");
+		}
+		this.nivelEnergia += energia;
+	}
 
-    	    if (this.energia > 200) {
-    	        throw new RuntimeException("La energía de una criatura salvaje no puede superar 200.");
-    	    }
-    }
 }
