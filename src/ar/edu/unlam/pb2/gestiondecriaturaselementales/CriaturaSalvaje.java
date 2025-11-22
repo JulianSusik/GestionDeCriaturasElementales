@@ -1,75 +1,39 @@
 package ar.edu.unlam.pb2.gestiondecriaturaselementales;
 
-public class CriaturaAncestral extends CriaturaElemental {
+public class CriaturaSalvaje extends CriaturaElemental {
+	private final Integer AUMENTO_ALEATORIO_MAXIMO = 51;
 
-	private boolean estaSensibleAlEntrenamiento = false;
-	private final Integer ENERGIA_GANADA = 10;
-	private final Integer MINIMO_ENERGIA = 100;
-	private final Integer ENERGIA_QUE_PIERDE = 15;
-
-	public CriaturaAncestral(String nombre) {
+	public CriaturaSalvaje(String nombre) {
 		super(nombre);
-		// TODO Auto-generated constructor stub
-		this.nivelEnergia = generador.nextInt(101) + MINIMO_ENERGIA;
+		this.nivelEnergia = generador.nextInt(151);
 	}
 
-	public CriaturaAncestral(String nombre, Elementos elemento, Integer nivelEnergia, EstadoEmocional estado) {
+	public CriaturaSalvaje(String nombre, Elementos elemento, Integer nivelEnergia, EstadoEmocional estado) {
 		super(nombre, elemento, nivelEnergia, estado);
-		if (nivelEnergia < 100)
-			throw new IllegalArgumentException(
-					"No se puede inicializar una CRIATURA ANCESTRAL con menos de 100 de ENERGIA. Valor ingresado:"
-							+ nivelEnergia);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void entrenar() throws LimiteEnergiaSuperadoException {
-		// TODO Auto-generated method stub
-		if (this.nivelEnergia == this.MAXIMO_ENERGIA)
-			throw new LimiteEnergiaSuperadoException(
-					"La energia esta en su nivel maximo. No se puede seguir entrenando");
-
-		if (estaSensibleAlEntrenamiento == true) {
-
-			nivelEnergia -= ENERGIA_QUE_PIERDE;
-			if (nivelEnergia < MINIMO_ENERGIA)
-				nivelEnergia = MINIMO_ENERGIA;
-			if (generador.nextInt(4) == 0)
-				estaSensibleAlEntrenamiento = false;
-
-		} else {
-
-			if (this.nivelEnergia > this.MAXIMO_ENERGIA - ENERGIA_GANADA) {
-				nivelEnergia = this.MAXIMO_ENERGIA;
-			} else {
-				nivelEnergia += ENERGIA_GANADA;
-			}
-			if (generador.nextInt(4) == 0)
-				;
-
-		}
-
-	}
-
-	public void entrenar(Integer energia) throws LimiteEnergiaSuperadoException {
+		Integer valorAAumentar = generador.nextInt(AUMENTO_ALEATORIO_MAXIMO);
 		Integer auxiliar = nivelEnergia;
 		if (this.nivelEnergia == this.MAXIMO_ENERGIA)
 			throw new LimiteEnergiaSuperadoException(
 					"La energia esta en su nivel maximo. No se puede seguir entrenando");
-		if ((auxiliar + energia) > this.MAXIMO_ENERGIA) {
+		if ((auxiliar + valorAAumentar) > this.MAXIMO_ENERGIA) {
 			throw new LimiteEnergiaSuperadoException("No se puede superar los 200 puntos de energia.");
 		}
-		this.nivelEnergia += energia;
+		this.nivelEnergia += valorAAumentar;
+
 	}
 
 	@Override
 	public void pacificar() {
 		if (this.estado == EstadoEmocional.TRANQUILA)
 			throw new CriaturaYaPacificaException("No se puede pacificar una criatura que no se encuentra inestable");
-		estado = EstadoEmocional.TRANQUILA;
+
+		if (generador.nextInt(4) != 3)
+			estado = EstadoEmocional.TRANQUILA;
 	}
 
-	@Override
-	public boolean esAncestral() {
-		return true;
-	}
 }
