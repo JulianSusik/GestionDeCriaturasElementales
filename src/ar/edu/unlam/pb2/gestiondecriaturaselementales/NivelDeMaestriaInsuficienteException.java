@@ -1,11 +1,11 @@
 package ar.edu.unlam.pb2.gestiondecriaturaselementales;
 
-public class NivelDeMaestriaInsuficiente extends Exception {
+public class NivelDeMaestriaInsuficienteException extends Exception {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public NivelDeMaestriaInsuficiente(String mensaje) {
-		super(mensaje);
-	}
+    public NivelDeMaestriaInsuficienteException(String mensaje) {
+        super(mensaje);
+    }
 
 }
