@@ -135,7 +135,10 @@ public class MaestroElemental {
 		return viento;
 
 	}
-
+		public Elementos getAfinidadElemental() {
+		
+		return this.afinidadPrincipal;
+	}
 	public Elementos getAfinidadPrincipal() {
 		return afinidadPrincipal;
 	}
@@ -174,4 +177,4 @@ public class MaestroElemental {
 
 }
 
-}
+
