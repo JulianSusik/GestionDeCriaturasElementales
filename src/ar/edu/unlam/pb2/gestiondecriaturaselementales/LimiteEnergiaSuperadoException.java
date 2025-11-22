@@ -1,6 +1,6 @@
 package ar.edu.unlam.pb2.gestiondecriaturaselementales;
 
-public class LimiteEnergiaSuperadoException extends Exception {
+public class LimiteEnergiaSuperadoException extends RuntimeException {
 
 	/**
 	 * 
