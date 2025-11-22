@@ -47,7 +47,17 @@ abstract class CriaturaElemental implements Entrenable {
 		return estado;
 	}
 
-	public abstract void entrenar() throws LimiteEnergiaSuperadoException;
+	public abstract void entrenar() throws LimiteEnergiaSuperadoException;	
+	
+	public void entrenar(Integer energia) {
+		Integer auxiliar = this.nivelEnergia;
+		if (this.nivelEnergia == this.MAXIMO_ENERGIA)
+			throw new LimiteEnergiaSuperadoException("La energia esta en su nivel maximo. No se puede seguir entrenando");
+		if ((auxiliar+energia)> this.MAXIMO_ENERGIA) {
+			throw new LimiteEnergiaSuperadoException("No se puede superar los 200 puntos de energia.");
+		}
+		this.nivelEnergia += energia;
+	}
 
 	public void setNivelEnergia(Integer nivelEnergia) {
 		if (this.nivelEnergia < MINIMO_ENERGIA || this.nivelEnergia > MAXIMO_ENERGIA)
